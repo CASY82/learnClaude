@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>홈</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 60px 48px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 480px;
+            width: 100%;
+        }
+        h1 { font-size: 2rem; color: #222; margin-bottom: 12px; }
+        p { color: #666; font-size: 1rem; margin-bottom: 36px; line-height: 1.6; }
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            background: #0066cc;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #0052a3; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>게시판</h1>
+    <p>게시글을 작성하고 관리하세요.</p>
+    <a class="btn" th:href="@{/posts}">게시글 목록 보기</a>
+</div>
+</body>
+</html>

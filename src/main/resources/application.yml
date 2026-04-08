@@ -8,5 +8,17 @@ post:
   storage:
     file-path: data/posts.json
 
+todo:
+  storage:
+    file-path: data/todos.json
+
+memo:
+  storage:
+    file-path: data/memos.json
+
+bookmark:
+  storage:
+    file-path: data/bookmarks.json
+
 server:
   port: 8080

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>북마크 목록</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #f5f5f5; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .btn { display: inline-block; padding: 8px 16px; background: #0066cc; color: white; border-radius: 4px; text-decoration: none; }
+        .empty { color: #888; margin-top: 20px; }
+        .filter { margin-top: 16px; margin-bottom: 8px; }
+        .filter select { padding: 6px 10px; font-size: 14px; }
+        .pin-badge { color: #e6a800; font-weight: bold; margin-right: 4px; }
+        .category-badge { display: inline-block; padding: 2px 8px; background: #eee; border-radius: 10px; font-size: 12px; color: #555; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+<h1>북마크 목록</h1>
+
+<div class="toolbar">
+    <a class="btn" th:href="@{/bookmarks/new}">+ 새 북마크</a>
+    <form class="filter" th:action="@{/bookmarks}" method="get">
+        <select name="category" onchange="this.form.submit()">
+            <option value="">전체 카테고리</option>
+            <option th:each="cat : ${categories}"
+                    th:value="${cat}"
+                    th:text="${cat}"
+                    th:selected="${cat == selectedCategory}">
+            </option>
+        </select>
+    </form>
+</div>
+
+<table th:if="${not #lists.isEmpty(bookmarks)}">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>제목</th>
+        <th>카테고리</th>
+        <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bookmark : ${bookmarks}">
+        <td th:text="${bookmark.id}"></td>
+        <td>
+            <span class="pin-badge" th:if="${bookmark.pinned}">&#9733;</span>
+            <a th:href="@{/bookmarks/{id}(id=${bookmark.id})}" th:text="${bookmark.title}"></a>
+        </td>
+        <td><span class="category-badge" th:text="${bookmark.category}"></span></td>
+        <td th:text="${#temporals.format(bookmark.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p class="empty" th:if="${#lists.isEmpty(bookmarks)}">등록된 북마크가 없습니다.</p>
+</body>
+</html>

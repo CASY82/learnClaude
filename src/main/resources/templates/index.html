@@ -8,40 +8,74 @@
         body {
             font-family: sans-serif;
             background: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
+            padding: 60px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 { font-size: 2rem; color: #222; margin-bottom: 8px; }
+        .subtitle { color: #666; font-size: 1rem; margin-bottom: 40px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
         .card {
             background: white;
             border-radius: 12px;
-            padding: 60px 48px;
-            text-align: center;
+            padding: 32px 24px;
+            text-align: left;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            max-width: 480px;
-            width: 100%;
-        }
-        h1 { font-size: 2rem; color: #222; margin-bottom: 12px; }
-        p { color: #666; font-size: 1rem; margin-bottom: 36px; line-height: 1.6; }
-        .btn {
-            display: inline-block;
-            padding: 14px 36px;
-            background: #0066cc;
-            color: white;
-            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
             text-decoration: none;
-            font-size: 1rem;
-            transition: background 0.2s;
+            color: inherit;
+            display: block;
         }
-        .btn:hover { background: #0052a3; }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        .card-icon { font-size: 2rem; margin-bottom: 12px; }
+        .card-title { font-size: 1.25rem; color: #222; font-weight: bold; margin-bottom: 8px; }
+        .card-desc { color: #666; font-size: 0.9rem; line-height: 1.5; }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-<div class="card">
-    <h1>게시판</h1>
-    <p>게시글을 작성하고 관리하세요.</p>
-    <a class="btn" th:href="@{/posts}">게시글 목록 보기</a>
+<div class="container">
+    <h1>My Workspace</h1>
+    <p class="subtitle">필요한 기능을 선택하세요.</p>
+
+    <div class="grid">
+        <a class="card" th:href="@{/posts}">
+            <div class="card-icon">&#128221;</div>
+            <div class="card-title">게시글</div>
+            <div class="card-desc">게시글을 작성하고 관리할 수 있습니다.</div>
+        </a>
+
+        <a class="card" th:href="@{/todos}">
+            <div class="card-icon">&#9989;</div>
+            <div class="card-title">할일</div>
+            <div class="card-desc">할일을 추가하고 완료 여부를 관리할 수 있습니다.</div>
+        </a>
+
+        <a class="card" th:href="@{/memos}">
+            <div class="card-icon">&#128196;</div>
+            <div class="card-title">메모</div>
+            <div class="card-desc">간단한 메모를 작성하고 관리할 수 있습니다.</div>
+        </a>
+
+        <a class="card" th:href="@{/bookmarks}">
+            <div class="card-icon">&#128278;</div>
+            <div class="card-title">북마크</div>
+            <div class="card-desc">자주 방문하는 URL을 저장하고 카테고리별로 관리할 수 있습니다.</div>
+        </a>
+    </div>
 </div>
 </body>
 </html>
